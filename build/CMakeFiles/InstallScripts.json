@@ -1,0 +1,18 @@
+{
+	"InstallScripts" : 
+	[
+		"C:/Users/Administrator/Desktop/cursor270/cursor_fy/build/cmake_install.cmake",
+		"C:/Users/Administrator/Desktop/cursor270/cursor_fy/build/Source/cmake_install.cmake",
+		"C:/Users/Administrator/Desktop/cursor270/cursor_fy/build/Source/BasicMathFunctions/cmake_install.cmake",
+		"C:/Users/Administrator/Desktop/cursor270/cursor_fy/build/Source/ConcatenationFunctions/cmake_install.cmake",
+		"C:/Users/Administrator/Desktop/cursor270/cursor_fy/build/Source/FullyConnectedFunctions/cmake_install.cmake",
+		"C:/Users/Administrator/Desktop/cursor270/cursor_fy/build/Source/ConvolutionFunctions/cmake_install.cmake",
+		"C:/Users/Administrator/Desktop/cursor270/cursor_fy/build/Source/ActivationFunctions/cmake_install.cmake",
+		"C:/Users/Administrator/Desktop/cursor270/cursor_fy/build/Source/PoolingFunctions/cmake_install.cmake",
+		"C:/Users/Administrator/Desktop/cursor270/cursor_fy/build/Source/SoftmaxFunctions/cmake_install.cmake",
+		"C:/Users/Administrator/Desktop/cursor270/cursor_fy/build/Source/SVDFunctions/cmake_install.cmake",
+		"C:/Users/Administrator/Desktop/cursor270/cursor_fy/build/Source/ReshapeFunctions/cmake_install.cmake",
+		"C:/Users/Administrator/Desktop/cursor270/cursor_fy/build/Source/NNSupportFunctions/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

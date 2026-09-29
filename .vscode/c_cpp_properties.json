@@ -1,0 +1,34 @@
+{
+    "configurations": [
+        {
+            "name": "fY_270_Keil",
+            "compileCommands": "${workspaceFolder}/compile_commands.json",
+            "includePath": [
+                "${workspaceFolder}/Core/Inc",
+                "${workspaceFolder}/Drivers/STM32F4xx_HAL_Driver/Inc",
+                "${workspaceFolder}/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy",
+                "${workspaceFolder}/Drivers/CMSIS/Device/ST/STM32F4xx/Include",
+                "${workspaceFolder}/Drivers/CMSIS/Include",
+                "${workspaceFolder}/UserFiles",
+                "${workspaceFolder}/UserFiles/APP/app",
+                "${workspaceFolder}/UserFiles/APP/servo",
+                "${workspaceFolder}/Core/Src/servo"
+            ],
+            "defines": [
+                "USE_HAL_DRIVER",
+                "STM32F405xx"
+            ],
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "gcc-arm",
+            "browse": {
+                "path": [
+                    "${workspaceFolder}/Core",
+                    "${workspaceFolder}/UserFiles"
+                ],
+                "limitSymbolsToIncludedHeaders": false
+            }
+        }
+    ],
+    "version": 4
+}
