@@ -102,7 +102,7 @@ int main(void)
   MX_TIM6_Init();
   MX_TIM1_Init();
   /* USER CODE BEGIN 2 */
-	APP_Ctrl_System_Init();
+	APP_Ctrl_System_Init();//初始化代码
 	
   /* USER CODE END 2 */
 
@@ -110,7 +110,7 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  APP_Ctrl_System_Handle();
+	  APP_Ctrl_System_Handle();//主任务
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
