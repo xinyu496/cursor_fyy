@@ -688,31 +688,8 @@ static void USER_Ctrl_ImgCmdFillRandom(GD_TO_IMG_U *frame)
     frame->field.target_lon = s_opt_calib_record.lon;
     frame->field.target_lat = s_opt_calib_record.lat;
     frame->field.target_alt = s_opt_calib_record.alt;
-    frame->field.time_year = (uint16_t)rand();
-    frame->field.time_month = (uint8_t)((rand() % 12U) + 1U);
-    frame->field.time_day = (uint8_t)((rand() % 28U) + 1U);
-    frame->field.time_hour = (uint8_t)(rand() % 24U);
-    frame->field.time_min = (uint8_t)(rand() % 60U);
-    frame->field.time_sec = (uint8_t)(rand() % 60U);
-    frame->field.time_ms = (uint16_t)(rand() % 1000U);
-    frame->field.track_id = (uint32_t)(((uint32_t)rand() << 16) | (uint32_t)rand());
-//    *(uint8_t *)&frame->field.fault_sta = (uint8_t)rand();
-	uint8_t warning_state = (g_servo.fw_axis.status.in_place << 1) | g_servo.gd_axis.status.in_place;
-    *(uint8_t *)&frame->field.alarm_sta = warning_state; /* bit0 俯仰到位，bit1 方位到位 */
-//    frame->field.vis_focal = (uint16_t)rand();
-//    *(uint8_t *)&frame->field.vis_sta = (uint8_t)rand();
-//    frame->field.brightness = (uint8_t)rand();
-//    frame->field.contrast = (uint8_t)rand();
-//    frame->field.saturation = (uint8_t)rand();
-//    frame->field.ele_zoom = (uint8_t)rand();
-//    frame->field.ir_focal = (uint16_t)rand();
-//    *(uint8_t *)&frame->field.ir_sta = (uint8_t)rand();
-//    frame->field.ir_contrast = (uint8_t)rand();
-//    frame->field.ir_brightness = (uint8_t)rand();
-//    frame->field.integration_time = (uint8_t)rand();
-//    frame->field.noise_filter = (uint8_t)(rand() & 0x01U);
-//    frame->field.north_fw = (int16_t)rand();
-//    frame->field.center_gd = (int16_t)rand();
+//	uint8_t warning_state = (g_servo.fw_axis.status.in_place << 1) | g_servo.gd_axis.status.in_place;
+//    *(uint8_t *)&frame->field.alarm_sta = warning_state; /* bit0 俯仰到位，bit1 方位到位 */
 }
 
 /**
@@ -1547,7 +1524,7 @@ void APP_Ctrl_System_Init(void)
 #if (USER_CTRL_OPT_CALIB_STORE == USER_CTRL_OPT_CALIB_STORE_EEPROM)
     USER_Ctrl_OptCalibEepromInit(); /* 绑定 I2C2 句柄 */
 #endif
-    USER_Ctrl_OptCalibStoreLoad(); /* 恢复经纬高/补偿 */
+//    USER_Ctrl_OptCalibStoreLoad(); /* 恢复经纬高/补偿 */
     USER_Ctrl_FwCmdSendInit();   /* 俯仰→方位发送缓冲初始化 */
     USER_Ctrl_MdrvCmdSendInit(); /* 俯仰→驱动板发送缓冲初始化 */
     USER_Ctrl_BmqSpiReadInit();  /* 编码器 SPI 接收缓冲初始化 */
@@ -1580,7 +1557,6 @@ void APP_Ctrl_System_Handle(void)
     uint32_t pending_1ms = TAKE_TIM_FLAG_1ms();
 
     while (pending_1ms > 0U) {
-
 //        servo_module_handler();
 		alldeal();
         USER_Ctrl_GyroFaultTick1ms();          /* 陀螺有效帧超时判故障 */
@@ -1590,33 +1566,6 @@ void APP_Ctrl_System_Handle(void)
         USER_Ctrl_ImgCmdFillRandom(&GdToImgCmd); /* 发送前填充 payload（角/速来自伺服） */
         USER_Ctrl_ImgCmdSend(NULL);              /* 图像板：1kHz 周期上行 */
         pending_1ms--;
-#if DEBUG_MODE
-		if(debug_lxy)
-		{
-			debug_lxy = 0;
-			ImgToGdCmd.field.param1 = 0xe8;
-			ImgToGdCmd.field.param2 = 0x03;
-			ImgToGdCmd.field.param3 = 0x00;
-			ImgToGdCmd.field.param4 = 0x00;
-			ImgToGdCmd.field.param5 = 0xe8;
-			ImgToGdCmd.field.param6 = 0x03;
-			ImgToGdCmd.field.param7 = 0x00;
-			ImgToGdCmd.field.param8 = 0x00;
-			ImgToGdCmd.field.param9 =  0xe8;
-			ImgToGdCmd.field.param10 = 0x03;
-			ImgToGdCmd.field.param11 = 0x00;
-			ImgToGdCmd.field.param12 = 0x00;
-			ImgToGdCmd.field.param13 = 0xe8;
-			ImgToGdCmd.field.param14 = 0x03;
-			ImgToGdCmd.field.param15 = 0x00;
-			ImgToGdCmd.field.param16 = 0x00;
-			ImgToGdCmd.field.param17 = 0xe8;
-			ImgToGdCmd.field.param18 = 0x03;
-			ImgToGdCmd.field.param19 = 0x00;
-			ImgToGdCmd.field.param20 = 0x00;
-			USER_Ctrl_ImgSfCmdOptCalib(&ImgToGdCmd);
-		}
-#endif
 		}
 		
 }

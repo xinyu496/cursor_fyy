@@ -30,7 +30,7 @@
 #include "Common/utl_check.h"
 #include "Bsp/bsp_uart.h"
 
-#define DEBUG_MODE  0
+
 
 /* -------------------------------------------------------------------------- */
 /*                         小端序读写（协议 wire 格式）                          */
