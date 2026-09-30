@@ -58,6 +58,7 @@
 #include "Bsp/SEGGER_RTT.h"
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>
 #include "Common/utl_check.h"
 #include "main.h"
 #if (USER_CTRL_OPT_CALIB_STORE == USER_CTRL_OPT_CALIB_STORE_FLASH)
@@ -82,6 +83,8 @@ GD_TO_MDRV_U GdToMdrvCmd;                              /**< 俯仰→驱动板�
 MDRV_TO_GD_U MdrvToGdCmd;                              /**< 驱动板→俯仰接收缓冲 */
 GYRO_RX_U GyroRxFrame;                                 /**< 陀螺原始帧缓冲（最新一帧，13 字节） */
 GYRO_RX_DATA_T GyroRxData;                             /**< 陀螺解析结果（X/Z 轴 raw 与 °/s） */
+
+GeoPoint_t middle_self, middle_target , gps_self , gps_target;/**< 光电校正命令数据 */
 
 #define led_run HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_12) /**< 运行指示灯 PB12 翻转 */
 
@@ -449,6 +452,37 @@ static void USER_Ctrl_FwToGdLeUnpack(FW_TO_GD_U *frame)
     frame->field.time_ms = USER_CTRL_LE_GET_U16(&b[47]);
     frame->field.track_id = USER_CTRL_LE_GET_U32(&b[49]);
 
+    /*
+     * 光电转台基座姿态，全部用角度（°）写入 INS。
+     * 协议角 LSB=0.01°。协议没有单独的转台航向字段，转台方位 turntable_fw 同时作为转台航向。
+     * 前提：转台装在车上，安装时没有横滚方向偏移。
+     * 车横滚协议范围 -9000~9000，字段类型是 uint16_t，这里按 int16_t 解释。
+     * sinf/cosf 的入参只能是弧度，所以只在调用时把转台方位乘 π/180；
+     * 车航向、车俯仰、车横滚、转台俯仰和 INS 结果都保持为度。
+     *
+     * A 航向 = 车航向 + 转台航向
+     * B 俯仰 = 车俯仰 + cos(转台方位) * 转台俯仰 + sin(转台方位) * 车横滚
+     * C 横滚 = 车横滚 + sin(转台方位) * 转台俯仰
+     */
+    {
+        float veh_heading_deg = (float)frame->field.vehicle_heading * 0.01f;
+        float veh_pitch_deg = (float)frame->field.vehicle_pitch * 0.01f;
+        float veh_roll_deg = (float)(int16_t)frame->field.vehicle_roll * 0.01f;
+        float tt_az_deg = (float)frame->field.turntable_fw * 0.01f;
+        float tt_pitch_deg = (float)frame->field.turntable_gd * 0.01f;
+        float s_az = sinf(tt_az_deg * (3.14159265f / 180.0f));
+        float c_az = cosf(tt_az_deg * (3.14159265f / 180.0f));
+
+        INS.Yaw = veh_heading_deg + tt_az_deg;
+        INS.Pitch = veh_pitch_deg + c_az * tt_pitch_deg + s_az * veh_roll_deg;
+        INS.Roll = veh_roll_deg + s_az * tt_pitch_deg;
+    }
+	
+	middle_self.alt_m = frame->field.altitude;
+	middle_self.lat_deg = (float)frame->field.latitude / 100000;
+	middle_self.lon_deg = (float)frame->field.longitude / 100000;
+
+
     /* 方位编码器异常时，置位俯仰→图像故障状态 bit2 */
     GdToImgCmd.field.fault_sta.fw_encoder_fault =
         (frame->field.fw_encoder_sta != 0U) ? 1U : 0U;
@@ -688,6 +722,13 @@ static void USER_Ctrl_ImgCmdFillRandom(GD_TO_IMG_U *frame)
     frame->field.target_lon = s_opt_calib_record.lon;
     frame->field.target_lat = s_opt_calib_record.lat;
     frame->field.target_alt = s_opt_calib_record.alt;
+    frame->field.self_longitude  =(int)(middle_self.lon_deg * 100000);  
+	frame->field.self_latitude  = (int)(middle_self.lat_deg * 100000);  
+	frame->field.self_high  =    middle_self.alt_m;      
+	
+    frame->field.self_fwangle = (int16_t)(INS.Yaw*100);  
+	frame->field.self_fyangle = (int16_t)(INS.Pitch*100);  
+	frame->field.self_hgangle = (int16_t)(INS.Roll*100);  
 //	uint8_t warning_state = (g_servo.fw_axis.status.in_place << 1) | g_servo.gd_axis.status.in_place;
 //    *(uint8_t *)&frame->field.alarm_sta = warning_state; /* bit0 俯仰到位，bit1 方位到位 */
 }
@@ -952,7 +993,7 @@ double deg__(double deg)
 {
     return deg * M_PI / 180.0;
 }
-GeoPoint_t middle_self, middle_target , gps_self , gps_target;
+
 /***************************************************************/
 /**
  * @brief  0x04 引导
@@ -981,13 +1022,13 @@ static void USER_Ctrl_ImgSfCmdGuide(const IMG_TO_GD_U *cmd)
 	
 	Target.lattitude = deg__(middle_target.lat_deg);	//目标值
 	Target.longitude = deg__(middle_target.lon_deg);	//目标值
-	Target.height = middle_target.alt_m;            	//目标值
+	Target.height = middle_target.alt_m;            	    //目标值
 	INS.lattitude = deg__(middle_self.lat_deg);     	//自身值
 	INS.longitude = deg__(middle_self.lon_deg);     	//自身值
-	INS.height = middle_self.alt_m;                 	//自身值
-//	PT_Angle.Fw = FWControl.P_fb;						//实测方位俯仰值 林辉程序*需修改飞总程序变量
-//	PT_Angle.Fy = GDControl.P_fb;						//实测方位俯仰值 林辉程序*需修改飞总程序变量
-	PT_Angle.Hg = 0;									//横滚填0
+	INS.height = middle_self.alt_m;                 	    //自身值
+	PT_Angle.Fw = FWControl.P_fb;						    //实测方位俯仰值 林辉程序*需修改飞总程序变量
+	PT_Angle.Fy = GDControl.P_fb;						    //实测方位俯仰值 林辉程序*需修改飞总程序变量
+	PT_Angle.Hg = 0;									    //横滚填0
 
 	TGTV = TGT(Target,INS);//目标与载机连线在大地系下的角度
 	Triangle_Fun_Cal_Result = Triangle_Fun_Cal(INS,PT_Angle);
@@ -1268,6 +1309,8 @@ static void USER_Ctrl_ImgSfCmdOptCalib(const IMG_TO_GD_U *cmd)
 	middle_self.lat_deg = (float)lat / 100000;
 	middle_self.lon_deg = (float)lon / 100000;
 
+
+
     /* 方位补偿角归一化到 [0, 360) */
     if (INS.Yaw >= 360) {
         INS.Yaw -= 360;
@@ -1528,8 +1571,6 @@ void APP_Ctrl_System_Init(void)
     USER_Ctrl_FwCmdSendInit();   /* 俯仰→方位发送缓冲初始化 */
     USER_Ctrl_MdrvCmdSendInit(); /* 俯仰→驱动板发送缓冲初始化 */
     USER_Ctrl_BmqSpiReadInit();  /* 编码器 SPI 接收缓冲初始化 */
-
-    // TIMER_Pwm_Init(3, 1);        /* PWM 使能 */
 
     HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_3); /* PWM 使能 */  
     HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_4); /* PWM 使能 */
