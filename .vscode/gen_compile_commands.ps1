@@ -9,7 +9,8 @@ $inc = @(
     '-IDrivers/CMSIS/Include',
     '-IUserFiles',
     '-IUserFiles/APP/app',
-    '-IUserFiles/APP/servo'
+    '-IUserFiles/APP/servo',
+    '-ICore/Src/servo'
 )
 $defs = @('-std=c11', '--target=arm-none-eabi', '-DUSE_HAL_DRIVER', '-DSTM32F405xx')
 $entries = New-Object System.Collections.Generic.List[object]
@@ -21,11 +22,11 @@ foreach ($m in $matches) {
     $seen[$rel] = $true
     $full = (Join-Path $root $rel) -replace '\\', '/'
     if (-not (Test-Path $full)) { continue }
-    $args = @('clang', '-c') + $inc + $defs + @($rel)
+    $clangArgs = @('clang', '-c') + $defs + $inc + @($rel)
     $entries.Add([ordered]@{
             directory  = $root
             file       = $full
-            arguments  = $args
+            arguments  = $clangArgs
         })
 }
 $out = Join-Path $root "compile_commands.json"

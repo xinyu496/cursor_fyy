@@ -650,22 +650,40 @@ static void USER_Ctrl_MdrvCmdSendInit(void)
  */
 static void USER_Ctrl_ImgCmdFillRandom(GD_TO_IMG_U *frame)
 {
+	float fw_angle_middle;
     if (frame == NULL) {
         return;
     }
+    /*******************计算空间指向角发往上位机*******************/
+	static uint8_t Orient_Convert_cnt = 0;
 
-    frame->field.fw_angle = g_servo.fw_axis.sensor.angle_360 * 100;  /* 方位角，0.01° */
-	if(g_servo.gd_axis.sensor.angle_360>90)
+	Orient_Convert_cnt++;
+	if(Orient_Convert_cnt >10)
 	{
-		frame->field.gd_angle = (g_servo.gd_axis.sensor.angle_360-360) * 100;  /* 俯仰>90° 折到负角 */
+		Orient_Convert_cnt = 0;
+		if (FWControl.P_fb < 0) {
+        /* 负反馈角先转到 [0,360) 再加补偿 */
+		fw_angle_middle = (FWControl.P_fb + 360) ;    
+		} else {
+			fw_angle_middle = (FWControl.P_fb + 0) ;
+
+		}
+		
+		PT_Angle.Fw = fw_angle_middle;
+		PT_Angle.Fy = GDControl.P_fb;
+		PT_Angle.Hg = 0;
+		Triangle_Fun_Cal_Result = Triangle_Fun_Cal(INS , PT_Angle);
+		Orient = Orient_Convert(Triangle_Fun_Cal_Result);
 	}
-	else
+	if(Orient.Orient_Yaw < 0)
 	{
-		frame->field.gd_angle = g_servo.gd_axis.sensor.angle_360 * 100;
+		Orient.Orient_Yaw += 360;
 	}
-    
-    frame->field.fw_speed = g_servo.fw_axis.sensor.ev * 100;         /* 方位角速度，0.01°/s */
-    frame->field.gd_speed = g_servo.gd_axis.sensor.ev * 100;         /* 俯仰角速度，0.01°/s */
+
+	frame->field.fw_angle = (uint16_t)(Orient.Orient_Yaw * 100); //空间指向角
+    frame->field.gd_angle = (int16_t)(Orient.Orient_Pitch * 100);//空间指向角
+    frame->field.fw_speed = FWControl.Ev_fb * 100;         /* 方位角速度，0.01°/s */
+    frame->field.gd_speed = GDControl.Ev_fb * 100;         /* 俯仰角速度，0.01°/s */
     /* 经纬高来自持久化缓存，非随机数 */
     frame->field.target_lon = s_opt_calib_record.lon;
     frame->field.target_lat = s_opt_calib_record.lat;
@@ -1541,7 +1559,7 @@ void APP_Ctrl_System_Init(void)
 //    servo_module_init();                      /* 伺服模块初始化 */
     initdatapar();
 	initcontrolpar();
-	
+	/*************FLASH测试代码***************/
 //	Flash_Erase_Sector(FLASH_F4ADDR_SECTOR_7);
 //	Flash_WriteNoErase(FLASH_F4ADDR_SECTOR_7 , debug_w_buff , 100);
 //	Flash_Read(FLASH_F4ADDR_SECTOR_7 , debug_r_buff , 100);

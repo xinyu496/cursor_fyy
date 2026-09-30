@@ -738,7 +738,7 @@ void allprocess(void)
 			clr_gd_p();
 			clr_gddg();
 			
-		    GDControl.V_give = gdtloop_TV1(7,15,0.1,7,15,GDControl.SamT,20,gd_miss);//10 5
+		    GDControl.V_give = gdtloop_TV1(5,5,0.1,5,5,GDControl.SamT,20,gd_miss);//10 5
             GDControl.A_give = gdvloop(GDControl.Kp_V,GDControl.Ki_V,GDControl.SamT,GDControl.Amax,Up_Limit,Down_Limit,GDControl.V_give,GDControl.V_fb,GDSensor.angle);
 			GDControl.I_give = gdaloop(GDControl.Kp_A,GDControl.Ki_A,GDControl.SamT,GDControl.Kg_A,GDControl.BW_A,GDControl.Imax,GDControl.A_give,GDControl.A_fb);
 			gd_en();	
@@ -750,7 +750,7 @@ void allprocess(void)
 			clr_fw_p();
 			clr_fwdg();
 			
-			FWControl.V_give = fwtloop_TV1(7,15,0.1,7,15,FWControl.SamT,30,fw_miss,GDSensor.Sec_GD);				
+			FWControl.V_give = fwtloop_TV1(5,5,0.1,5,5,FWControl.SamT,20,fw_miss,GDSensor.Sec_GD);				
 		    FWControl.A_give = fwvloop(FWControl.Kp_V,FWControl.Ki_V,FWControl.SamT,FWControl.Amax,Left_Limit,Right_Limit,FWControl.V_give,FWControl.V_fb,FWSensor.angle,0,FWControl.bound_V);
 			FWControl.I_give = fwaloop(FWControl.Kp_A,FWControl.Ki_A,FWControl.SamT,FWControl.Kg_A,FWControl.BW_A,FWControl.Imax,FWControl.A_give,FWControl.A_fb,fabs(GDSensor.angle),FWControl.bound_A);
 			fw_en();						
