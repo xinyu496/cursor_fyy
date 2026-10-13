@@ -17,17 +17,92 @@ Library Manager: ArmAr.exe V5.06 update 7 (build 960)
 Hex Converter:   FromElf.exe V5.06 update 7 (build 960)
 CPU DLL:         SARMCM3.DLL V5.35.0.2
 Dialog DLL:      DCM.DLL V1.17.3.0
-Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V3.0.9.0
+Target DLL:      Segger\JL2CM3.dll V2.99.40.0
 Dialog DLL:      TCM.DLL V1.53.0.0
  
 <h2>Project:</h2>
-C:\Users\Administrator\Desktop\2700923\fy270_0930\MDK-ARM\fY_270.uvprojx
+C:\Users\Administrator\Desktop\2700923\cq\270\fy270_0930\MDK-ARM\fY_270.uvprojx
 Project File Date:  09/28/2026
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 7 (build 960)', folder: 'D:\download_tools_software\my_keil\ARM\ARMCC\Bin'
 Build target 'fY_270'
-".\fy_270\fy_270.axf" - 0 Error(s), 0 Warning(s).
+compiling SF_20240116.c...
+..\Core\Src\servo\SF.h(366): warning:  #1-D: last line of file ends without a newline
+  //------定义完毕-----------//
+../UserFiles/APP/GEO_Track_C.h(194): warning:  #1-D: last line of file ends without a newline
+  //--------------输入角度单位：�?----------------------------//
+..\Core\Src\servo\SF_20240116.c(152): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  						GDControl.U_give = Amp*sin(0.00628*Freq*Test_Count);										
+..\Core\Src\servo\SF_20240116.c(161): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  						GDControl.I_give = Amp*sin(0.00628*Freq*Test_Count);     					
+..\Core\Src\servo\SF_20240116.c(175): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  						GDControl.I_give = Amp*sin(0.00628*Freq*Test_Count);	
+..\Core\Src\servo\SF_20240116.c(184): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  						GDControl.A_give = Amp*sin(0.00628*Freq*Test_Count);	
+..\Core\Src\servo\SF_20240116.c(198): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  						GDControl.I_give = Amp*sin(0.00628*Freq*Test_Count);	
+..\Core\Src\servo\SF_20240116.c(207): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  						GDControl.V_give = Amp*sin(0.00628*Freq*Test_Count);	
+..\Core\Src\servo\SF_20240116.c(243): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  						GDControl.Eacc_give = Amp*sin(0.00628*Freq*Test_Count);	
+..\Core\Src\servo\SF_20240116.c(258): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  						GDControl.I_give = Amp*sin(0.00628*Freq*Test_Count);	
+..\Core\Src\servo\SF_20240116.c(267): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  						GDControl.Ev_give = Amp*sin(0.00628*Freq*Test_Count);	
+..\Core\Src\servo\SF_20240116.c(288): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  						GDControl.P_give = Amp*sin(0.00628*Freq*Test_Count);	
+..\Core\Src\servo\SF_20240116.c(311): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  						FWControl.U_give = Amp*sin(0.00628*Freq*Test_Count);					
+..\Core\Src\servo\SF_20240116.c(321): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  						FWControl.I_give = Amp*sin(0.00628*Freq*Test_Count);	
+..\Core\Src\servo\SF_20240116.c(336): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  						FWControl.I_give = Amp*sin(0.00628*Freq*Test_Count);	
+..\Core\Src\servo\SF_20240116.c(345): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  						FWControl.A_give = Amp*sin(0.00628*Freq*Test_Count);	
+..\Core\Src\servo\SF_20240116.c(360): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  						FWControl.I_give = Amp*sin(0.00628*Freq*Test_Count);	
+..\Core\Src\servo\SF_20240116.c(369): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  						FWControl.V_give = Amp*sin(0.00628*Freq*Test_Count);	
+..\Core\Src\servo\SF_20240116.c(403): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  						FWControl.GEO_give = Amp*sin(0.00628*Freq*Test_Count);	
+..\Core\Src\servo\SF_20240116.c(419): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  						FWControl.I_give = Amp*sin(0.00628*Freq*Test_Count);	
+..\Core\Src\servo\SF_20240116.c(428): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  						FWControl.Ev_give = Amp*sin(0.00628*Freq*Test_Count);	
+..\Core\Src\servo\SF_20240116.c(448): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  						FWControl.P_give = Amp*sin(0.00628*Freq*Test_Count);	
+..\Core\Src\servo\SF_20240116.c(1114): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  	 if(GDSensor.angle>180.0)
+..\Core\Src\servo\SF_20240116.c(1123): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  	 	GDSensor.Cos_GD = cos(GDSensor.angle*Angle_cof_rad);
+..\Core\Src\servo\SF_20240116.c(1124): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  		GDSensor.Sec_GD = 1.0/GDSensor.Cos_GD;
+..\Core\Src\servo\SF_20240116.c(1175): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  	if(GDSensor.gyro>=300.0)  GDSensor.gyro =  300.0;
+..\Core\Src\servo\SF_20240116.c(1179): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  	if(GDSensor.acc>=2000.0)  GDSensor.acc =  2000.0;
+..\Core\Src\servo\SF_20240116.c(1187): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  	if(FWSensor.gyro>=300.0)  FWSensor.gyro =  300.0;
+..\Core\Src\servo\SF_20240116.c(1191): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  	if(FWSensor.acc>=3000.0)  FWSensor.acc =  3000.0;
+..\Core\Src\servo\SF_20240116.c(1209): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  	   if(fabs(GDevSum*0.001)<0.1)
+..\Core\Src\servo\SF_20240116.c(1211): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  		  if(fabs(GDevSum*0.001)<0.1)
+..\Core\Src\servo\SF_20240116.c(1272): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  		  if(fabs(1.0*GDControl.I_fb)>=8)
+..\Core\Src\servo\SF_20240116.c(1324): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  		  if(fabs(1.0*FWControl.I_fb)>=9)//9A
+..\Core\Src\servo\SF_20240116.c(1421): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  	gd_u_d     = gd_u_d_avg*0.80586080586;
+..\Core\Src\servo\SF_20240116.c(1422): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  	gd_i_temp  = (gd_u_d-1650)*0.01515151515;		
+..\Core\Src\servo\SF_20240116.c: 35 warnings, 0 errors
+linking...
+Program Size: Code=82746 RO-data=1158 RW-data=6072 ZI-data=9608  
+FromELF: creating hex file...
+".\fy_270\fy_270.axf" - 0 Error(s), 35 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -51,7 +126,7 @@ Package Vendor: Keil
 
    * Component: ARM::CMSIS:CORE:5.5.0
       Include file:  CMSIS\Core\Include\tz_context.h
-Build Time Elapsed:  00:00:00
+Build Time Elapsed:  00:00:02
 </pre>
 </body>
 </html>
