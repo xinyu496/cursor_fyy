@@ -1096,21 +1096,11 @@ static void USER_Ctrl_ImgSfCmdLock(const IMG_TO_GD_U *cmd)
 	{
 		servo_lock_on_command(LOCK_CMD_LOCK, 5000);
 	}
-    
-	if(GdToImgCmd.field.fw_angle<18000)
+
+	if((GdToImgCmd.field.fw_angle <= 50) || (GdToImgCmd.field.fw_angle >= 35950) )
 	{
-		if(GdToImgCmd.field.fw_angle <= 50)
-		{
-			USER_Ctrl_FwSetLockEnable(1U);
-		}
+		USER_Ctrl_FwSetLockEnable(1U);
 	}
-	if(GdToImgCmd.field.fw_angle>18000)
-	{
-		if(GdToImgCmd.field.fw_angle >= 35950)   
-		{
-			USER_Ctrl_FwSetLockEnable(1U);
-		}
-	}	
 }
 
 /**
