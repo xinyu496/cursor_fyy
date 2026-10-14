@@ -27,103 +27,6 @@ Project File Date:  10/13/2026
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 7 (build 960)', folder: 'D:\download_tools_software\my_keil\ARM\ARMCC\Bin'
 Build target 'fY_270'
-compiling stm32f4xx_hal_msp.c...
-compiling spi.c...
-compiling tim.c...
-compiling stm32f4xx_hal_i2c_ex.c...
-compiling dma.c...
-compiling i2c.c...
-compiling gpio.c...
-compiling usart.c...
-compiling stm32f4xx_it.c...
-compiling main.c...
-..\Core\Src\servo\SF.h(366): warning:  #1-D: last line of file ends without a newline
-  //------定义完毕-----------//
-../Core/Src/main.c: 1 warning, 0 errors
-compiling stm32f4xx_hal_i2c.c...
-compiling stm32f4xx_hal_flash_ramfunc.c...
-compiling stm32f4xx_hal_dma.c...
-compiling stm32f4xx_hal_flash.c...
-compiling stm32f4xx_hal_gpio.c...
-compiling stm32f4xx_hal_pwr.c...
-compiling stm32f4xx_hal_cortex.c...
-compiling stm32f4xx_hal_rcc_ex.c...
-compiling stm32f4xx_hal_flash_ex.c...
-compiling stm32f4xx_hal_pwr_ex.c...
-compiling stm32f4xx_hal_rcc.c...
-compiling stm32f4xx_hal_dma_ex.c...
-compiling servo_controller.c...
-compiling servo_axis.c...
-compiling servo_test.c...
-compiling servo_tune.c...
-compiling stm32f4xx_hal_exti.c...
-compiling system_stm32f4xx.c...
-compiling stm32f4xx_hal.c...
-compiling SEGGER_RTT.c...
-compiling stm32f4xx_hal_spi.c...
-compiling stm32f4xx_hal_uart.c...
-compiling bsp_gpio.c...
-compiling stm32f4xx_hal_tim_ex.c...
-compiling SEGGER_RTT_printf.c...
-compiling bsp_iic.c...
-compiling servo_module.c...
-..\UserFiles\APP\servo\servo_module.c(232): warning:  #177-D: function "fw_get_gyro_raw"  was declared but never referenced
-  static int32_t fw_get_gyro_raw(void)
-..\UserFiles\APP\servo\servo_module.c(305): warning:  #177-D: function "gd_get_gyro_raw"  was declared but never referenced
-  static int32_t gd_get_gyro_raw(void)
-..\UserFiles\APP\servo\servo_module.c: 2 warnings, 0 errors
-compiling stm32f4xx_hal_tim.c...
-compiling app_ctrl.c...
-../UserFiles/APP/GEO_Track_C.h(194): warning:  #1-D: last line of file ends without a newline
-  //--------------输入角度单位：�?----------------------------//
-..\Core\Src\servo\SF.h(366): warning:  #1-D: last line of file ends without a newline
-  //------定义完毕-----------//
-..\UserFiles\APP\app\app_ctrl.c(926): warning:  #188-D: enumerated type mixed with another type
-      servo_ext_cmd_t excmd = {0};
-..\UserFiles\APP\app\app_ctrl.c(926): warning:  #550-D: variable "excmd"  was set but never used
-      servo_ext_cmd_t excmd = {0};
-..\UserFiles\APP\app\app_ctrl.c(955): warning:  #188-D: enumerated type mixed with another type
-      servo_ext_cmd_t excmd = {0};
-..\UserFiles\APP\app\app_ctrl.c(955): warning:  #550-D: variable "excmd"  was set but never used
-      servo_ext_cmd_t excmd = {0};
-..\UserFiles\APP\app\app_ctrl.c(983): warning:  #188-D: enumerated type mixed with another type
-      servo_ext_cmd_t excmd = {0};
-..\UserFiles\APP\app\app_ctrl.c(983): warning:  #550-D: variable "excmd"  was set but never used
-      servo_ext_cmd_t excmd = {0};
-..\UserFiles\APP\app\app_ctrl.c(1067): warning:  #188-D: enumerated type mixed with another type
-      servo_ext_cmd_t excmd = {0};
-..\UserFiles\APP\app\app_ctrl.c(1067): warning:  #550-D: variable "excmd"  was set but never used
-      servo_ext_cmd_t excmd = {0};
-..\UserFiles\APP\app\app_ctrl.c(1083): warning:  #188-D: enumerated type mixed with another type
-      servo_ext_cmd_t excmd = {0};
-..\UserFiles\APP\app\app_ctrl.c(1083): warning:  #550-D: variable "excmd"  was set but never used
-      servo_ext_cmd_t excmd = {0};
-..\UserFiles\APP\app\app_ctrl.c(1315): warning:  #1035-D: single-precision operand implicitly converted to double-precision
-  	INS.Roll      = (float)roll * 0.01;
-..\UserFiles\APP\app\app_ctrl.c(1316): warning:  #1035-D: single-precision operand implicitly converted to double-precision
-      INS.Pitch     = (float)gd_comp * 0.01;
-..\UserFiles\APP\app\app_ctrl.c(1317): warning:  #1035-D: single-precision operand implicitly converted to double-precision
-  	INS.Yaw       = (float)fw_comp * 0.01;
-..\UserFiles\APP\app\app_ctrl.c(1262): warning:  #550-D: variable "updated"  was set but never used
-      uint8_t updated = 0U;
-..\UserFiles\APP\app\app_ctrl.c(1360): warning:  #188-D: enumerated type mixed with another type
-      servo_ext_cmd_t excmd = {0};
-..\UserFiles\APP\app\app_ctrl.c(1231): warning:  #177-D: function "USER_Ctrl_OptCalibStoreLoad"  was declared but never referenced
-  static void USER_Ctrl_OptCalibStoreLoad(void)
-..\UserFiles\APP\app\app_ctrl.c(1241): warning:  #177-D: function "USER_Ctrl_OptCalibStoreSave"  was declared but never referenced
-  static void USER_Ctrl_OptCalibStoreSave(void)
-..\UserFiles\APP\app\app_ctrl.c(153): warning:  #550-D: variable "s_fw_ctrl_current_mA"  was set but never used
-  static int16_t s_fw_ctrl_current_mA;           /**< 方位电流给定缓存（mA，发送前写入 GdToFwCmd�? */
-..\UserFiles\APP\app\app_ctrl.c: 20 warnings, 0 errors
-compiling bsp_uart.c...
-compiling drv_i2c_eeprom.c...
-compiling bsp_flash.c...
-..\UserFiles\Bsp\bsp_flash.c(275): warning:  #177-D: variable "new_data_t"  was declared but never referenced
-  	uint8_t new_data_t = 0;
-..\UserFiles\Bsp\bsp_flash.c: 1 warning, 0 errors
-compiling bsp_timer.c...
-compiling utl_check.c...
-compiling drv_uart.c...
 compiling SF_20240116.c...
 ..\Core\Src\servo\SF.h(366): warning:  #1-D: last line of file ends without a newline
   //------定义完毕-----------//
@@ -196,10 +99,54 @@ compiling SF_20240116.c...
 ..\Core\Src\servo\SF_20240116.c(1422): warning:  #1035-D: single-precision operand implicitly converted to double-precision
   	gd_i_temp  = (gd_u_d-1650)*0.01515151515;		
 ..\Core\Src\servo\SF_20240116.c: 35 warnings, 0 errors
+compiling app_ctrl.c...
+../UserFiles/APP/GEO_Track_C.h(194): warning:  #1-D: last line of file ends without a newline
+  //--------------输入角度单位：�?----------------------------//
+..\Core\Src\servo\SF.h(366): warning:  #1-D: last line of file ends without a newline
+  //------定义完毕-----------//
+..\UserFiles\APP\app\app_ctrl.c(926): warning:  #188-D: enumerated type mixed with another type
+      servo_ext_cmd_t excmd = {0};
+..\UserFiles\APP\app\app_ctrl.c(926): warning:  #550-D: variable "excmd"  was set but never used
+      servo_ext_cmd_t excmd = {0};
+..\UserFiles\APP\app\app_ctrl.c(955): warning:  #188-D: enumerated type mixed with another type
+      servo_ext_cmd_t excmd = {0};
+..\UserFiles\APP\app\app_ctrl.c(955): warning:  #550-D: variable "excmd"  was set but never used
+      servo_ext_cmd_t excmd = {0};
+..\UserFiles\APP\app\app_ctrl.c(983): warning:  #188-D: enumerated type mixed with another type
+      servo_ext_cmd_t excmd = {0};
+..\UserFiles\APP\app\app_ctrl.c(983): warning:  #550-D: variable "excmd"  was set but never used
+      servo_ext_cmd_t excmd = {0};
+..\UserFiles\APP\app\app_ctrl.c(1067): warning:  #188-D: enumerated type mixed with another type
+      servo_ext_cmd_t excmd = {0};
+..\UserFiles\APP\app\app_ctrl.c(1067): warning:  #550-D: variable "excmd"  was set but never used
+      servo_ext_cmd_t excmd = {0};
+..\UserFiles\APP\app\app_ctrl.c(1083): warning:  #188-D: enumerated type mixed with another type
+      servo_ext_cmd_t excmd = {0};
+..\UserFiles\APP\app\app_ctrl.c(1083): warning:  #550-D: variable "excmd"  was set but never used
+      servo_ext_cmd_t excmd = {0};
+..\UserFiles\APP\app\app_ctrl.c(1102): warning:  #186-D: pointless comparison of unsigned integer with zero
+      && (GdToImgCmd.field.fw_angle >= 0))
+..\UserFiles\APP\app\app_ctrl.c(1307): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  	INS.Roll      = (float)roll * 0.01;
+..\UserFiles\APP\app\app_ctrl.c(1308): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+      INS.Pitch     = (float)gd_comp * 0.01;
+..\UserFiles\APP\app\app_ctrl.c(1309): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  	INS.Yaw       = (float)fw_comp * 0.01;
+..\UserFiles\APP\app\app_ctrl.c(1254): warning:  #550-D: variable "updated"  was set but never used
+      uint8_t updated = 0U;
+..\UserFiles\APP\app\app_ctrl.c(1352): warning:  #188-D: enumerated type mixed with another type
+      servo_ext_cmd_t excmd = {0};
+..\UserFiles\APP\app\app_ctrl.c(1223): warning:  #177-D: function "USER_Ctrl_OptCalibStoreLoad"  was declared but never referenced
+  static void USER_Ctrl_OptCalibStoreLoad(void)
+..\UserFiles\APP\app\app_ctrl.c(1233): warning:  #177-D: function "USER_Ctrl_OptCalibStoreSave"  was declared but never referenced
+  static void USER_Ctrl_OptCalibStoreSave(void)
+..\UserFiles\APP\app\app_ctrl.c(153): warning:  #550-D: variable "s_fw_ctrl_current_mA"  was set but never used
+  static int16_t s_fw_ctrl_current_mA;           /**< 方位电流给定缓存（mA，发送前写入 GdToFwCmd�? */
+..\UserFiles\APP\app\app_ctrl.c: 21 warnings, 0 errors
 linking...
-Program Size: Code=82746 RO-data=1158 RW-data=6072 ZI-data=9608  
+Program Size: Code=82770 RO-data=1158 RW-data=6072 ZI-data=9608  
 FromELF: creating hex file...
-".\fy_270\fy_270.axf" - 0 Error(s), 59 Warning(s).
+".\fy_270\fy_270.axf" - 0 Error(s), 56 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -223,7 +170,7 @@ Package Vendor: Keil
 
    * Component: ARM::CMSIS:CORE:5.5.0
       Include file:  CMSIS\Core\Include\tz_context.h
-Build Time Elapsed:  00:00:17
+Build Time Elapsed:  00:00:02
 </pre>
 </body>
 </html>

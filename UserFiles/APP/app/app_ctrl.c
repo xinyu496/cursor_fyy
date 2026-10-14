@@ -1096,8 +1096,10 @@ static void USER_Ctrl_ImgSfCmdLock(const IMG_TO_GD_U *cmd)
 	{
 		servo_lock_on_command(LOCK_CMD_LOCK, 5000);
 	}
-
-	if((GdToImgCmd.field.fw_angle <= 50) || (GdToImgCmd.field.fw_angle >= 35950) )
+    /*****************0-0.5 , 359.5-360范围内允许上锁**************************/
+	if(((GdToImgCmd.field.fw_angle <= 50) || (GdToImgCmd.field.fw_angle >= 35950) ) 
+    && (GdToImgCmd.field.fw_angle <= 36000)
+    && (GdToImgCmd.field.fw_angle >= 0))
 	{
 		USER_Ctrl_FwSetLockEnable(1U);
 	}
@@ -1430,15 +1432,15 @@ static void USER_Ctrl_ImgCmdRecvTask(void)
 			image_connect_error = 0;
             USER_Ctrl_FwSetFaultCode(ImgToGdCmd.field.fault_code);
             USER_Ctrl_ImgSfCmdDispatch(&ImgToGdCmd);
-			commandprocess();
-//			if(FY_LockStatus != 1)
-//			{
-//				commandprocess();
-//			}
-//			else
-//			{
-//				all_brake();
-//			}
+            commandprocess();
+			// if(FY_LockStatus != 1)
+			// {
+			// 	commandprocess();
+			// }
+			// else
+			// {
+			// 	all_brake();
+			// }
 		}
     }
 }
