@@ -72,7 +72,7 @@ void alldeal(void)
 {
 	
  //------传感器数据处理------//		
-		FW_ManualBrake = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_10);
+		FW_ManualBrake = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_14);
        
 		CurrentInit();
         gyrobutter();
@@ -82,12 +82,12 @@ void alldeal(void)
 	
        if(FW_ManualBrake)
 	   {		   
-		 allprocess();
+			allprocess();
 	   }
        else	 
 	   {
-		clr_all();
-		all_brake();	   	   	   
+			clr_all();
+			all_brake();	   	   	   
 	   }		   
 	
 // //------功能实现----------//
@@ -557,7 +557,6 @@ extern int32_t fw_comp;
 extern int32_t gd_comp;
 void allprocess(void)
 {
-	PTstate = P_Withdrawal;
 	switch(PTstate)
 	{
 		case(P_Brake):  

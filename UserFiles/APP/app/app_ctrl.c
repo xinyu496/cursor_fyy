@@ -159,6 +159,7 @@ static uint8_t s_fw_servo_work_sta;            /**< 伺服工作状态（协议 
 static uint8_t s_fw_fault_code;                /**< 故障码（协议 byte12） */
 static uint16_t s_gyro_rx_stale_ms;            /**< 陀螺有效帧超时计数（ms） */
 static uint8_t s_spi1_bmq_busy_ms;             /**< SPI1 DMA 忙等待计数（ms） */
+uint8_t FY_LockStatus = 0;					   /**< 俯仰电磁锁状态标志 */
 
 #define SPI1_BMQ_BUSY_TIMEOUT_MS     3U        /**< SPI 超时未就绪则复位总线 */
 #define SPI1_BMQ_ABORT_TIMEOUT_MS    10U       /**< DMA Abort 等待超时 */
@@ -824,7 +825,8 @@ void USER_Ctrl_FwCmdSend(GD_TO_FW_U *frame)
 {
     GD_TO_FW_U *tx = (frame != NULL) ? frame : &GdToFwCmd;
 
-    if (frame == NULL) {
+    if (frame == NULL) 
+	{
         USER_Ctrl_FwCmdFillPayload();
     }
 
@@ -1090,16 +1092,25 @@ static void USER_Ctrl_ImgSfCmdLock(const IMG_TO_GD_U *cmd)
 {
     (void)cmd;
 
-	if((GdToImgCmd.field.gd_angle <= 5) || (GdToImgCmd.field.gd_angle >= 95))
+	if((GdToImgCmd.field.gd_angle <= 50) && (GdToImgCmd.field.gd_angle >= -50))
 	{
 		servo_lock_on_command(LOCK_CMD_LOCK, 5000);
 	}
     
-	if((GdToImgCmd.field.fw_angle <= 30) || (GdToImgCmd.field.fw_angle >= 35950))
+	if(GdToImgCmd.field.fw_angle<18000)
 	{
-		USER_Ctrl_FwSetLockEnable(1U);
+		if(GdToImgCmd.field.fw_angle <= 50)
+		{
+			USER_Ctrl_FwSetLockEnable(1U);
+		}
 	}
-    
+	if(GdToImgCmd.field.fw_angle>18000)
+	{
+		if(GdToImgCmd.field.fw_angle >= 35950)   
+		{
+			USER_Ctrl_FwSetLockEnable(1U);
+		}
+	}	
 }
 
 /**
@@ -1418,17 +1429,27 @@ static void USER_Ctrl_ImgCmdRecvTask(void)
 		image_connect_cnt = 0;
 		image_connect_error = 1;
 	}
-    if (COM_REC_DataAnalysis_1head_accu(COM_GD_IMG, ImgToGdCmd.buf) != 0) {
+    if (COM_REC_DataAnalysis_1head_accu(COM_GD_IMG, ImgToGdCmd.buf) != 0) 
+	{
         USER_Ctrl_ImgToGdLeUnpack(&ImgToGdCmd);
         s_img_cmd_recv_fresh = 1;
 
-        if (ImgToGdCmd.field.recv_addr == REC_ADDR_SF) {
+        if (ImgToGdCmd.field.recv_addr == REC_ADDR_SF) 
+		{
 			image_connect_cnt = 0;
 			image_connect_error = 0;
             USER_Ctrl_FwSetFaultCode(ImgToGdCmd.field.fault_code);
             USER_Ctrl_ImgSfCmdDispatch(&ImgToGdCmd);
 			commandprocess();
-        }
+//			if(FY_LockStatus != 1)
+//			{
+//				commandprocess();
+//			}
+//			else
+//			{
+//				all_brake();
+//			}
+		}
     }
 }
 
@@ -1582,6 +1603,15 @@ void APP_Ctrl_System_Init(void)
 //	Flash_WriteNoErase(FLASH_F4ADDR_SECTOR_7 , debug_w_buff , 100);
 //	Flash_Read(FLASH_F4ADDR_SECTOR_7 , debug_r_buff , 100);
 }
+/**
+ *@brief  主循环周期处理
+ *@note   读取FY电磁锁状态
+*/
+void read_Limit(void)
+{
+	FY_LockStatus = HAL_GPIO_ReadPin(FYLimit_Lock_GPIO_Port, FYLimit_Lock_Pin);
+}
+
 uint8_t debug_lxy = 0;
 /**
  * @brief  主循环周期处理
@@ -1590,6 +1620,7 @@ uint8_t debug_lxy = 0;
 void APP_Ctrl_System_Handle(void)
 {
     USER_Ctrl_LedFun();
+	read_Limit();
     USER_Ctrl_ImgCmdRecvTask();  /* 图像→俯仰，约 1Hz 下行，小端 + 累加和 */
     USER_Ctrl_FwCmdRecvTask();   /* 方位→俯仰，约 1kHz，小端 + 累加和 */
     USER_Ctrl_GyroCmdRecvTask(); /* 陀螺→俯仰，USART6，大端 + 异或校验 */
