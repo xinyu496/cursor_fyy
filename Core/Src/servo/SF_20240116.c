@@ -72,22 +72,22 @@ void alldeal(void)
 {
 	
  //------传感器数据处理------//		
-		FW_ManualBrake = HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_9);
+		FW_ManualBrake = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_10);
        
 		CurrentInit();
         gyrobutter();
 		fwbmqdispose();
 		gdbmqdispose();
 		fbdispose(); 
-		allprocess();
-		if(FW_ManualBrake)
+	
+       if(FW_ManualBrake)
 	   {		   
-			allprocess();
+		 allprocess();
 	   }
-       else
+       else	 
 	   {
-			clr_all();
-			all_brake();	   	   	   
+		clr_all();
+		all_brake();	   	   	   
 	   }		   
 	
 // //------功能实现----------//
@@ -557,6 +557,7 @@ extern int32_t fw_comp;
 extern int32_t gd_comp;
 void allprocess(void)
 {
+	PTstate = P_Withdrawal;
 	switch(PTstate)
 	{
 		case(P_Brake):  
