@@ -102,7 +102,7 @@ bool servo_lock_on_command(uint8_t cmd, uint16_t action_ms)
 }
 
 /* 1ms 周期推进：动作计时到点后自动停止推杆 */
-static void servo_lock_tick_1ms(void)
+void servo_lock_tick_1ms(void)
 {
     if (s_lock.state == LOCK_STATE_IDLE) {
         return;

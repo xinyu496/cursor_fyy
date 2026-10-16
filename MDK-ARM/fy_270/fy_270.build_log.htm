@@ -21,13 +21,156 @@ Target DLL:      Segger\JL2CM3.dll V2.99.40.0
 Dialog DLL:      TCM.DLL V1.53.0.0
  
 <h2>Project:</h2>
-C:\Users\Administrator\Desktop\2700923\cq\270\fy270_0930\MDK-ARM\fY_270.uvprojx
+C:\Users\Administrator\Desktop\cursor270\cursor_fyy\MDK-ARM\fY_270.uvprojx
 Project File Date:  09/28/2026
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 7 (build 960)', folder: 'D:\download_tools_software\my_keil\ARM\ARMCC\Bin'
 Build target 'fY_270'
-".\fy_270\fy_270.axf" - 0 Error(s), 0 Warning(s).
+compiling i2c.c...
+compiling stm32f4xx_hal_msp.c...
+compiling gpio.c...
+compiling tim.c...
+compiling dma.c...
+compiling usart.c...
+compiling spi.c...
+compiling stm32f4xx_it.c...
+compiling main.c...
+..\Core\Src\servo\SF.h(366): warning:  #1-D: last line of file ends without a newline
+  //------定义完毕-----------//
+../Core/Src/main.c: 1 warning, 0 errors
+compiling servo_module.c...
+..\UserFiles\APP\servo\servo_module.c(232): warning:  #177-D: function "fw_get_gyro_raw"  was declared but never referenced
+  static int32_t fw_get_gyro_raw(void)
+..\UserFiles\APP\servo\servo_module.c(305): warning:  #177-D: function "gd_get_gyro_raw"  was declared but never referenced
+  static int32_t gd_get_gyro_raw(void)
+..\UserFiles\APP\servo\servo_module.c: 2 warnings, 0 errors
+compiling app_ctrl.c...
+../UserFiles/APP/GEO_Track_C.h(194): warning:  #1-D: last line of file ends without a newline
+  //--------------输入角度单位：�?----------------------------//
+..\Core\Src\servo\SF.h(366): warning:  #1-D: last line of file ends without a newline
+  //------定义完毕-----------//
+..\UserFiles\APP\app\app_ctrl.c(936): warning:  #188-D: enumerated type mixed with another type
+      servo_ext_cmd_t excmd = {0};
+..\UserFiles\APP\app\app_ctrl.c(936): warning:  #550-D: variable "excmd"  was set but never used
+      servo_ext_cmd_t excmd = {0};
+..\UserFiles\APP\app\app_ctrl.c(965): warning:  #188-D: enumerated type mixed with another type
+      servo_ext_cmd_t excmd = {0};
+..\UserFiles\APP\app\app_ctrl.c(965): warning:  #550-D: variable "excmd"  was set but never used
+      servo_ext_cmd_t excmd = {0};
+..\UserFiles\APP\app\app_ctrl.c(993): warning:  #188-D: enumerated type mixed with another type
+      servo_ext_cmd_t excmd = {0};
+..\UserFiles\APP\app\app_ctrl.c(993): warning:  #550-D: variable "excmd"  was set but never used
+      servo_ext_cmd_t excmd = {0};
+..\UserFiles\APP\app\app_ctrl.c(1077): warning:  #188-D: enumerated type mixed with another type
+      servo_ext_cmd_t excmd = {0};
+..\UserFiles\APP\app\app_ctrl.c(1077): warning:  #550-D: variable "excmd"  was set but never used
+      servo_ext_cmd_t excmd = {0};
+..\UserFiles\APP\app\app_ctrl.c(1093): warning:  #188-D: enumerated type mixed with another type
+      servo_ext_cmd_t excmd = {0};
+..\UserFiles\APP\app\app_ctrl.c(1093): warning:  #550-D: variable "excmd"  was set but never used
+      servo_ext_cmd_t excmd = {0};
+..\UserFiles\APP\app\app_ctrl.c(1325): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  	INS.Roll      = (float)roll * 0.01;
+..\UserFiles\APP\app\app_ctrl.c(1326): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+      INS.Pitch     = (float)gd_comp * 0.01;
+..\UserFiles\APP\app\app_ctrl.c(1327): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  	INS.Yaw       = (float)fw_comp * 0.01;
+..\UserFiles\APP\app\app_ctrl.c(1272): warning:  #550-D: variable "updated"  was set but never used
+      uint8_t updated = 0U;
+..\UserFiles\APP\app\app_ctrl.c(1370): warning:  #188-D: enumerated type mixed with another type
+      servo_ext_cmd_t excmd = {0};
+..\UserFiles\APP\app\app_ctrl.c(1241): warning:  #177-D: function "USER_Ctrl_OptCalibStoreLoad"  was declared but never referenced
+  static void USER_Ctrl_OptCalibStoreLoad(void)
+..\UserFiles\APP\app\app_ctrl.c(1251): warning:  #177-D: function "USER_Ctrl_OptCalibStoreSave"  was declared but never referenced
+  static void USER_Ctrl_OptCalibStoreSave(void)
+..\UserFiles\APP\app\app_ctrl.c(153): warning:  #550-D: variable "s_fw_ctrl_current_mA"  was set but never used
+  static int16_t s_fw_ctrl_current_mA;           /**< 方位电流给定缓存（mA，发送前写入 GdToFwCmd�? */
+..\UserFiles\APP\app\app_ctrl.c(156): warning:  #550-D: variable "s_fw_dev_angle_cdeg"  was set but never used
+  static int16_t s_fw_dev_angle_cdeg;            /**< 方位偏差角，0.01° */
+..\UserFiles\APP\app\app_ctrl.c(157): warning:  #550-D: variable "s_gd_dev_angle_cdeg"  was set but never used
+  static int16_t s_gd_dev_angle_cdeg;            /**< 俯仰偏差角，0.01° */
+..\UserFiles\APP\app\app_ctrl.c: 22 warnings, 0 errors
+compiling bsp_timer.c...
+compiling drv_uart.c...
+compiling SF_20240116.c...
+..\Core\Src\servo\SF.h(366): warning:  #1-D: last line of file ends without a newline
+  //------定义完毕-----------//
+../UserFiles/APP/GEO_Track_C.h(194): warning:  #1-D: last line of file ends without a newline
+  //--------------输入角度单位：�?----------------------------//
+..\Core\Src\servo\SF_20240116.c(74): warning:  #223-D: function "servo_lock_tick_1ms" declared implicitly
+  	servo_lock_tick_1ms();//限位�?
+..\Core\Src\servo\SF_20240116.c(153): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  						GDControl.U_give = Amp*sin(0.00628*Freq*Test_Count);										
+..\Core\Src\servo\SF_20240116.c(162): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  						GDControl.I_give = Amp*sin(0.00628*Freq*Test_Count);     					
+..\Core\Src\servo\SF_20240116.c(176): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  						GDControl.I_give = Amp*sin(0.00628*Freq*Test_Count);	
+..\Core\Src\servo\SF_20240116.c(185): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  						GDControl.A_give = Amp*sin(0.00628*Freq*Test_Count);	
+..\Core\Src\servo\SF_20240116.c(199): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  						GDControl.I_give = Amp*sin(0.00628*Freq*Test_Count);	
+..\Core\Src\servo\SF_20240116.c(208): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  						GDControl.V_give = Amp*sin(0.00628*Freq*Test_Count);	
+..\Core\Src\servo\SF_20240116.c(244): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  						GDControl.Eacc_give = Amp*sin(0.00628*Freq*Test_Count);	
+..\Core\Src\servo\SF_20240116.c(259): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  						GDControl.I_give = Amp*sin(0.00628*Freq*Test_Count);	
+..\Core\Src\servo\SF_20240116.c(268): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  						GDControl.Ev_give = Amp*sin(0.00628*Freq*Test_Count);	
+..\Core\Src\servo\SF_20240116.c(289): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  						GDControl.P_give = Amp*sin(0.00628*Freq*Test_Count);	
+..\Core\Src\servo\SF_20240116.c(312): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  						FWControl.U_give = Amp*sin(0.00628*Freq*Test_Count);					
+..\Core\Src\servo\SF_20240116.c(322): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  						FWControl.I_give = Amp*sin(0.00628*Freq*Test_Count);	
+..\Core\Src\servo\SF_20240116.c(337): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  						FWControl.I_give = Amp*sin(0.00628*Freq*Test_Count);	
+..\Core\Src\servo\SF_20240116.c(346): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  						FWControl.A_give = Amp*sin(0.00628*Freq*Test_Count);	
+..\Core\Src\servo\SF_20240116.c(361): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  						FWControl.I_give = Amp*sin(0.00628*Freq*Test_Count);	
+..\Core\Src\servo\SF_20240116.c(370): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  						FWControl.V_give = Amp*sin(0.00628*Freq*Test_Count);	
+..\Core\Src\servo\SF_20240116.c(404): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  						FWControl.GEO_give = Amp*sin(0.00628*Freq*Test_Count);	
+..\Core\Src\servo\SF_20240116.c(420): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  						FWControl.I_give = Amp*sin(0.00628*Freq*Test_Count);	
+..\Core\Src\servo\SF_20240116.c(429): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  						FWControl.Ev_give = Amp*sin(0.00628*Freq*Test_Count);	
+..\Core\Src\servo\SF_20240116.c(449): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  						FWControl.P_give = Amp*sin(0.00628*Freq*Test_Count);	
+..\Core\Src\servo\SF_20240116.c(1115): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  	 if(GDSensor.angle>180.0)
+..\Core\Src\servo\SF_20240116.c(1124): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  	 	GDSensor.Cos_GD = cos(GDSensor.angle*Angle_cof_rad);
+..\Core\Src\servo\SF_20240116.c(1125): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  		GDSensor.Sec_GD = 1.0/GDSensor.Cos_GD;
+..\Core\Src\servo\SF_20240116.c(1176): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  	if(GDSensor.gyro>=300.0)  GDSensor.gyro =  300.0;
+..\Core\Src\servo\SF_20240116.c(1180): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  	if(GDSensor.acc>=2000.0)  GDSensor.acc =  2000.0;
+..\Core\Src\servo\SF_20240116.c(1188): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  	if(FWSensor.gyro>=300.0)  FWSensor.gyro =  300.0;
+..\Core\Src\servo\SF_20240116.c(1192): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  	if(FWSensor.acc>=3000.0)  FWSensor.acc =  3000.0;
+..\Core\Src\servo\SF_20240116.c(1210): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  	   if(fabs(GDevSum*0.001)<0.1)
+..\Core\Src\servo\SF_20240116.c(1212): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  		  if(fabs(GDevSum*0.001)<0.1)
+..\Core\Src\servo\SF_20240116.c(1273): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  		  if(fabs(1.0*GDControl.I_fb)>=8)
+..\Core\Src\servo\SF_20240116.c(1325): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  		  if(fabs(1.0*FWControl.I_fb)>=9)//9A
+..\Core\Src\servo\SF_20240116.c(1422): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  	gd_u_d     = gd_u_d_avg*0.80586080586;
+..\Core\Src\servo\SF_20240116.c(1423): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  	gd_i_temp  = (gd_u_d-1650)*0.01515151515;		
+..\Core\Src\servo\SF_20240116.c: 36 warnings, 0 errors
+linking...
+Program Size: Code=83022 RO-data=1154 RW-data=6072 ZI-data=9608  
+FromELF: creating hex file...
+".\fy_270\fy_270.axf" - 0 Error(s), 61 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -51,7 +194,7 @@ Package Vendor: Keil
 
    * Component: ARM::CMSIS:CORE:5.5.0
       Include file:  CMSIS\Core\Include\tz_context.h
-Build Time Elapsed:  00:00:00
+Build Time Elapsed:  00:00:06
 </pre>
 </body>
 </html>

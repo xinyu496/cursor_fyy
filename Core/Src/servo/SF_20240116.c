@@ -5,6 +5,7 @@
 #include "SF.h"
 #include "APP/app/app_ctrl.h"
 #include "APP/GEO_Track_C.h"
+#include "servo_controller.h"
 
 
 FWControlTypeDef FWControl;
@@ -70,7 +71,7 @@ float Test_Fre=0;
 //---------函数实现--------//
 void alldeal(void)
 {
-	
+	servo_lock_tick_1ms();//限位锁
  //------传感器数据处理------//		
 		FW_ManualBrake = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_14);
        

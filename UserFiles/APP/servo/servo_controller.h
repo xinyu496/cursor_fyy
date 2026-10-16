@@ -159,6 +159,7 @@ typedef struct dev_servo {
  *        典型实现：把 SF.h 中的 userF*RxMotorDrvPar / FYBMQ / FWBMQ / fygyro / fwgyro
  *        全局封装成 getter 函数，再把指针塞进 io 结构。
  */
-void dev_servo_init(dev_servo_t *pobj, const servo_axis_io_t *fw_io, const servo_axis_io_t *gd_io);
+void dev_servo_init(dev_servo_t *pobj, const servo_axis_io_t *fw_io, const servo_axis_io_t *gd_io); 
+void servo_lock_tick_1ms(void);
 
 #endif /* _SERVO_CONTROLLER_H_ */

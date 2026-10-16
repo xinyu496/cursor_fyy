@@ -619,8 +619,18 @@ static void USER_Ctrl_FwCmdFillPayload(void)
 //    GdToFwCmd.field.motor_enable = s_fw_motor_enable;
 //    GdToFwCmd.field.ctrl_current = s_fw_ctrl_current_mA;
     GdToFwCmd.field.lock_enable = s_fw_lock_enable;
-    GdToFwCmd.field.fw_dev_angle = s_fw_dev_angle_cdeg;
-    GdToFwCmd.field.gd_dev_angle = s_gd_dev_angle_cdeg;
+    float fw_dev_angle = FWControl.P_fb ;
+    float gd_dev_angle = GDControl.P_fb ;
+    if(fw_dev_angle < 0)
+    {
+        fw_dev_angle += 360;
+    }
+    if(gd_dev_angle < 0)
+    {
+        gd_dev_angle += 360;
+    }
+    GdToFwCmd.field.fw_dev_angle = fw_dev_angle * 100;
+    GdToFwCmd.field.gd_dev_angle = gd_dev_angle * 100;
     GdToFwCmd.field.servo_work_sta = s_fw_servo_work_sta;
 
     fault_sta.fw_encoder_fault = (FwToGdCmd.field.fw_encoder_sta != 0U) ? 1U : 0U;
@@ -1097,16 +1107,16 @@ static void USER_Ctrl_ImgSfCmdLock(const IMG_TO_GD_U *cmd)
 		servo_lock_on_command(LOCK_CMD_LOCK, 5000);
 	}
     
-	if(GdToImgCmd.field.fw_angle<18000)
+	if(FWControl.P_fb * 100 < 18000)
 	{
-		if(GdToImgCmd.field.fw_angle <= 50)
+		if(FWControl.P_fb * 100 <= 50)
 		{
 			USER_Ctrl_FwSetLockEnable(1U);
 		}
 	}
-	if(GdToImgCmd.field.fw_angle>18000)
+	if(GDControl.P_fb>18000)
 	{
-		if(GdToImgCmd.field.fw_angle >= 35950)   
+		if(GDControl.P_fb >= 35950)   
 		{
 			USER_Ctrl_FwSetLockEnable(1U);
 		}
@@ -1634,9 +1644,10 @@ void APP_Ctrl_System_Handle(void)
         USER_Ctrl_GyroFaultTick1ms();          /* 陀螺有效帧超时判故障 */
         USER_Ctrl_BmqSpiReadTask();              /* SPI1 DMA 读编码器 → SPI1_rxbuf */
         USER_Ctrl_MdrvCmdSend(NULL);             /* 驱动板：1kHz 发送电流/编码器/使能 */
-        USER_Ctrl_FwCmdSend(NULL);               /* 方位板：1kHz 发送电流/使能/偏差角等 */
+        
         USER_Ctrl_ImgCmdFillRandom(&GdToImgCmd); /* 发送前填充 payload（角/速来自伺服） */
         USER_Ctrl_ImgCmdSend(NULL);              /* 图像板：1kHz 周期上行 */
+        USER_Ctrl_FwCmdSend(NULL);               /* 方位板：1kHz 发送电流/使能/偏差角等 */
         pending_1ms--;
 		}
 		

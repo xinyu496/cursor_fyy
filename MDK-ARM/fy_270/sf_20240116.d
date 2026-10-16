@@ -53,3 +53,5 @@
 .\fy_270\sf_20240116.o: ../UserFiles/Common/config.h
 .\fy_270\sf_20240116.o: ../UserFiles/Bsp/bsp_uart.h
 .\fy_270\sf_20240116.o: ../UserFiles/APP/GEO_Track_C.h
+.\fy_270\sf_20240116.o: ..\Core\Src\servo\servo_controller.h
+.\fy_270\sf_20240116.o: ..\Core\Src\servo\servo_axis.h

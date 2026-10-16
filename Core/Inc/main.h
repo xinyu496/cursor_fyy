@@ -72,7 +72,7 @@ void Error_Handler(void);
 #define FY_HALock_Pin GPIO_PIN_8
 #define FY_HALock_GPIO_Port GPIOA
 #define FW_HALock_Pin GPIO_PIN_9
-#define FW_HALock_GPIO_Port GPIOA
+#define FW_HALock_GPIO_Port GPIOC
 #define INT2_Pin GPIO_PIN_12
 #define INT2_GPIO_Port GPIOA
 #define INT1_Pin GPIO_PIN_15
